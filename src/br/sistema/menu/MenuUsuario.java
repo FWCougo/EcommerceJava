@@ -1,24 +1,38 @@
 package br.sistema.menu;
 
 import br.sistema.conta.*;
+import br.sistema.BDD.*;
+import br.sistema.cliente.*;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuUsuario {
     private Loja loja;
-    private HistoricoCompras historico;
+    //private HistoricoCompras historico;
     private Scanner scanner;
-    private Carrinho carrinho;
+    //private Carrinho carrinho;
+    //private Usuario usuario;
+    private Cliente cliente;
+    private BancoDeDados bdd; 
+   
 
-    public MenuUsuario(Loja loja, HistoricoCompras historico) {
+    /*public MenuUsuario(Loja loja, HistoricoCompras historico) {
         this.loja = loja;
         this.historico = historico;
         this.scanner = new Scanner(System.in);
         this.carrinho = new Carrinho();
-    }
+    }*/
 
-    public void exibirMenu() {
+    public MenuUsuario(Loja loja, Cliente cliente /*Usuario usuario*/, BancoDeDados bdd) {
+        this.loja = loja;
+        //this.usuario = usuario;
+        this.cliente = cliente;
+        this.bdd = bdd;
+        this.scanner = new Scanner(System.in);
+    }
+    
+    public void exibirMenu() {    	
         int opcao;
         do {
             System.out.println("\n--- Menu do Usuário ---");
@@ -43,20 +57,27 @@ public class MenuUsuario {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
+            bdd.SalvarUsuarios();
             switch (opcao) {
                 case 1 -> listarProdutos();
                 case 2 -> buscarPorNome();
                 case 3 -> buscarPorCodigo();
                 case 4 -> buscarPorFornecedor();
                 case 5 -> adicionarAoCarrinho();
-                case 6 -> carrinho.exibirCarrinho();
-                case 7 -> carrinho.finalizarCompra(historico, loja);
+                //case 6 -> usuario.getCarrinho().exibirCarrinho();
+                case 6 -> cliente.getCarrinho().exibirCarrinho();
+                //case 7 -> usuario.getCarrinho().finalizarCompra(loja);
+                case 7 -> cliente.getCarrinho().finalizarCompra(loja);
                 case 8 -> verHistorico();
                 case 9 -> buscarCompraPorCodigo();
                 case 10 -> buscarCompraPorData();
-                case 0 -> System.out.println("Saindo...");
+                case 0 -> System.out.println("Saindo...");                
                 default -> System.out.println("Opção inválida.");
+                
             }
+            
+        
+        	
         } while (opcao != 0);
     }
 
@@ -141,11 +162,14 @@ public class MenuUsuario {
             return;
         }
 
-        carrinho.adicionarProduto(item, qtd);
+        //usuario.getCarrinho().adicionarProduto(item, qtd);
+        
+        cliente.getCarrinho().adicionarProduto(item, qtd);
     }
 
     private void verHistorico() {
-        List<Compra> lista = historico.listarCompras();
+        //List<Compra> lista = usuario.getHistoricoCompras().listarCompras();
+    	List<Compra> lista = cliente.getHistoricoCompras().listarCompras();
         if (lista.isEmpty()) {
             System.out.println("Nenhuma compra registrada.");
         } else {
@@ -159,7 +183,8 @@ public class MenuUsuario {
         System.out.print("Código da compra: ");
         int codigo = scanner.nextInt();
         scanner.nextLine();
-        Compra c = historico.buscarPorCodigo(codigo);
+        //Compra c = usuario.getHistoricoCompras().buscarPorCodigo(codigo);
+        Compra c = cliente.getHistoricoCompras().buscarPorCodigo(codigo);
         if (c != null) {
             System.out.println("Compra #" + c.getCodigo() + " em " + c.getData());
         } else {
@@ -170,7 +195,8 @@ public class MenuUsuario {
     private void buscarCompraPorData() {
         System.out.print("Data da compra (AAAA-MM-DD): ");
         String data = scanner.nextLine();
-        List<Compra> lista = historico.buscarPorData(data);
+        //List<Compra> lista = usuario.getHistoricoCompras().buscarPorData(data);
+        List<Compra> lista = cliente.getHistoricoCompras().buscarPorData(data);
         if (lista.isEmpty()) {
             System.out.println("Nenhuma compra nesta data.");
         } else {

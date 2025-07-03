@@ -1,10 +1,14 @@
 package br.sistema.conta;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Produto {
     private static int contador = 1;
     private int codigo;
     private String nome;
 
+    public Produto() {}
+    
     public Produto(String nome) {
         this.codigo = contador++;
         this.nome = nome;

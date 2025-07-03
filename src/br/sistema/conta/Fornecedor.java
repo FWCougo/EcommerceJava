@@ -1,21 +1,31 @@
 package br.sistema.conta;
 
-public class Fornecedor {
-    private String nome;
+public class Fornecedor extends Usuario{
     private String cnpj;
 
-    public Fornecedor(String nome, String cnpj) {
-        this.nome = nome;
-        this.cnpj = cnpj;
+    public Fornecedor() {
     }
+    
+    public Fornecedor(String nome) {
+        super(nome);
+    }
+    
+    public Fornecedor(String nome, String senha) {
+        super(nome, senha);
+    }
+    
+    /*public Fornecedor(String nome, String cnpj) {
+        super(nome);
+        this.cnpj = cnpj;
+    }*/
 
-    public String getNome() {
+    /*public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
+    }*/
 
     public String getCnpj() {
         return cnpj;

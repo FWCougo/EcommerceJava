@@ -5,7 +5,10 @@ public class ItemFornecedorProduto {
     private Fornecedor fornecedor;
     private double preco;
     private int quantidade;
-
+    
+    public ItemFornecedorProduto() {
+    }
+    
     public ItemFornecedorProduto(Produto produto, Fornecedor fornecedor, double preco, int quantidade) {
         this.produto = produto;
         this.fornecedor = fornecedor;
