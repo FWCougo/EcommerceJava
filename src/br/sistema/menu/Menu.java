@@ -3,12 +3,15 @@ package br.sistema.menu;
 import br.sistema.conta.*;
 
 import java.util.*;
+import br.sistema.BDD.*;
 
 public class Menu {
     private Loja loja;
     private Scanner scanner;
+    private BancoDeDados bdd;
 
-    public Menu(Loja loja) {
+    public Menu(Loja loja, BancoDeDados bdd) {
+    	this.bdd = bdd;
         this.loja = loja;
         this.scanner = new Scanner(System.in);
     }
@@ -16,6 +19,9 @@ public class Menu {
     public void exibirMenu() {
         int opcao;
         do {
+        	bdd.SalvarUsuarios();
+        	bdd.SalvarEstoque();
+        	bdd.SalvarProdutos();
             System.out.println("\n------ Menu Principal ------");
             System.out.println("1. Adicionar Produto");
             System.out.println("2. Listar Produtos");

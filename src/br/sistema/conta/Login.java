@@ -30,10 +30,12 @@ public class Login {
         }
                 
         for(int i = 0; i<bdd.getContas().size();i++) {
-        	if(bdd.getContas().get(i).getLogin().equals(usuario) && bdd.getContas().get(i).getSenha().equals(senha)){
-        			System.out.println("\nBem vindo " + usuario);
-        			this.usuario = bdd.getContas().get(i);
-        			return 1;
+        	if(bdd.getContas().get(i).getLogin() != null) {
+            	if(bdd.getContas().get(i).getLogin().equals(usuario) && bdd.getContas().get(i).getSenha().equals(senha)){
+            			System.out.println("\nBem vindo " + usuario);
+            			this.usuario = bdd.getContas().get(i);
+            			return 1;
+            	}	
         	}
         }
         

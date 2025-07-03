@@ -17,9 +17,12 @@ public class Principal {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BancoDeDados bdd = new BancoDeDados();        
-        Loja loja = inicializarLojaComProdutos();
-        //HistoricoCompras historico = new HistoricoCompras();
         GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios(bdd);
+        //Loja loja = new Loja(bdd);
+        //loja.carregarFornecedores();
+        Loja loja = inicializarLojaComProdutos(bdd);
+        //HistoricoCompras historico = new HistoricoCompras();
+        
 //        Usuario usuario = new Usuario();
         
         
@@ -48,7 +51,7 @@ public class Principal {
                     	tipoDeConta = l.realizarLogin(scanner);       	
                     }                     
                     if(tipoDeConta == 0) { 						
-                    	Menu menu = new Menu(loja);             
+                    	Menu menu = new Menu(loja,bdd);             
                         menu.exibirMenu();					    
                     }
                     else
@@ -140,9 +143,14 @@ public class Principal {
         return gUsuarios.realizarLogin(user, senha);
     }*/
 
-    private static Loja inicializarLojaComProdutos() {
-        Loja loja = new Loja();
-        Fornecedor fornecedor = new Fornecedor("Fornecedor Padrão", "12345678000199");
+    private static Loja inicializarLojaComProdutos(BancoDeDados bdd) {
+        Loja loja = new Loja(bdd);
+        Fornecedor fornecedor = new Fornecedor("Fornecedor Padrão", "12345");
+        fornecedor.setCnpj("12345678000199");
+        fornecedor.setNome("Fornecedor Padrão");
+        fornecedor.setEmail("fornecedorPadrao@gmail.com");
+        fornecedor.setTelefone("2623-4677");
+        fornecedor.setCEP("28950-000");
         loja.adicionarFornecedor(fornecedor);
 
         Produto p1 = new Produto("Mouse Gamer");

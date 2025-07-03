@@ -34,6 +34,9 @@ public class MenuUsuario {
     public void exibirMenu() {    	
         int opcao;
         do {
+        	bdd.SalvarUsuarios();
+        	bdd.SalvarEstoque();
+        	bdd.SalvarProdutos();
             System.out.println("\n--- Menu do Usuário ---");
             System.out.println("1. Ver todos os produtos");
             System.out.println("2. Buscar produto por nome");
@@ -56,7 +59,7 @@ public class MenuUsuario {
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            bdd.SalvarUsuarios();
+            
             switch (opcao) {
                 case 1 -> listarProdutos();
                 case 2 -> buscarPorNome();
