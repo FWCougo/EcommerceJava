@@ -2,7 +2,6 @@ package br.sistema.menu;
 
 import br.sistema.conta.*;
 import br.sistema.BDD.*;
-import br.sistema.cliente.*;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,11 +1,17 @@
 package br.sistema.teste;
 
-import br.sistema.conta.*;
-import br.sistema.menu.*;
-import br.sistema.BDD.*;
-import br.sistema.cliente.*;
-
 import java.util.Scanner;
+
+import br.sistema.BDD.BancoDeDados;
+import br.sistema.conta.Cliente;
+import br.sistema.conta.Fornecedor;
+import br.sistema.conta.GerenciadorUsuarios;
+import br.sistema.conta.ItemFornecedorProduto;
+import br.sistema.conta.Login;
+import br.sistema.conta.Loja;
+import br.sistema.conta.Produto;
+import br.sistema.menu.Menu;
+import br.sistema.menu.MenuUsuario;
 
 public class Principal {
     public static void main(String[] args) {
@@ -14,7 +20,7 @@ public class Principal {
         Loja loja = inicializarLojaComProdutos();
         //HistoricoCompras historico = new HistoricoCompras();
         GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios(bdd);
-        Usuario usuario = new Usuario();
+//        Usuario usuario = new Usuario();
         
         
         
@@ -47,13 +53,14 @@ public class Principal {
                     }
                     else
                     {
-                    	 usuario = l.getUsuario();
-                    	 
-                    	 if(usuario.getFornecedor()==0) {
+                    	 if(l.getUsuario().getFornecedor()==0) {
                     		 
-                    		 Cliente c = (Cliente) usuario;
+                    		 Cliente c = (Cliente) l.getUsuario();
                     		 MenuUsuario menuUsuario = new MenuUsuario(loja, c,bdd);
                              menuUsuario.exibirMenu();	 
+                    	 }else if(l.getUsuario().getFornecedor()==1) {
+                    		 Fornecedor f = (Fornecedor) l.getUsuario();
+                             //Add Menu Fornecedor                    		
                     	 }
                     	 
                     	 

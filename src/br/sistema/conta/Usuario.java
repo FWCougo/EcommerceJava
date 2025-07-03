@@ -1,12 +1,11 @@
 package br.sistema.conta;
-import br.sistema.cliente.*;
 
 import com.fasterxml.jackson.annotation.*;
 
 //import com.fasterxml.jackson.annotation.JsonTypeInfo;
 //import com.fasterxml.jackson.annotation.JsonSubTypes;
 
-@JsonTypeInfo(
+/*@JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "type"
@@ -14,9 +13,9 @@ import com.fasterxml.jackson.annotation.*;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Cliente.class, name = "cliente"),
     @JsonSubTypes.Type(value = Fornecedor.class, name = "fornecedor")
-})
+})*/
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Usuario {
+public abstract class Usuario {
 	private int fornecedor;
 	private String nome;
 	private String email;

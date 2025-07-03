@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.sistema.BDD.*;
-import br.sistema.cliente.*;
 
 
 
@@ -45,7 +44,7 @@ public class GerenciadorUsuarios {
     			f.setTelefone(sc.nextLine());
     			System.out.println("CEP do Fornecedor: "); 
     			f.setCEP(sc.nextLine());    
-    			
+    			f.setFornecedor(1);
     	        if (bdd.AdicionarUsuario(f)) {
     	            return true;
     	        }
@@ -69,8 +68,10 @@ public class GerenciadorUsuarios {
     			System.out.println("Telefone do Cliente: "); 
     			c.setTelefone(sc.nextLine());
     			System.out.println("CEP do Cliente: "); 
-    			c.setCEP(sc.nextLine());   
-    			
+    			c.setCEP(sc.nextLine());  
+    			System.out.println("N° do Cartão de Crédito: "); 
+    			c.setCartaoDeCredito(sc.nextLine());   
+    			c.setFornecedor(0);
     	        if (bdd.AdicionarUsuario(c)) {
     	            return true;
     	        }

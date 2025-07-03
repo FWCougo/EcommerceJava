@@ -1,5 +1,7 @@
 package br.sistema.conta;
+import com.fasterxml.jackson.annotation.*;
 
+@JsonTypeName("fornecedor")
 public class Fornecedor extends Usuario{
     private String cnpj;
 

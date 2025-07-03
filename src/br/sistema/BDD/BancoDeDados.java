@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.sistema.conta.*;
-import br.sistema.cliente.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
+import com.fasterxml.jackson.annotation.*;
 public class BancoDeDados {
 
 	private ObjectMapper mapper;
@@ -26,7 +25,12 @@ public class BancoDeDados {
     	this.mapper = new ObjectMapper();    	
     	this.mapper.registerModule(new JavaTimeModule());   	       	   
     	this.mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    	//this.mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+    	
+    	
+        this.mapper.enableDefaultTyping(
+                ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY
+            );	
     	
         CarregarUsuarios();
     }	    
@@ -56,12 +60,6 @@ public class BancoDeDados {
         System.out.println(json);
     }
     
-    public void printUserTypes() {
-        for (Usuario user : Contas) {
-            System.out.println("User: " + user.getNome() + 
-                             ", Type: " + user.getClass().getSimpleName());
-        }
-    }
     
 	public void SalvarUsuarios(Usuario usuario) {
     	Contas.add(usuario);
@@ -89,7 +87,6 @@ public class BancoDeDados {
             System.out.println("Erro ao salvar usuários: " + e.getMessage());
         }
         
-        printUserTypes();
     }  
     
     public boolean ChecaUsuario(Usuario u)

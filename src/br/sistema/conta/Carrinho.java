@@ -3,7 +3,6 @@ package br.sistema.conta;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.sistema.cliente.*; 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

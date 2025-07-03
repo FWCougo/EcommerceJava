@@ -1,7 +1,8 @@
-package br.sistema.cliente;
+package br.sistema.conta;
 
-import br.sistema.conta.*;
+import com.fasterxml.jackson.annotation.*;
 
+@JsonTypeName("cliente")
 public class Cliente extends Usuario{
 	
 	private String cartaoDeCredito;
@@ -26,6 +27,17 @@ public class Cliente extends Usuario{
     	this.carrinho = new Carrinho(this);
 	}
 	
+	
+	
+	
+	public String getCartaoDeCredito() {
+		return cartaoDeCredito;
+	}
+
+	public void setCartaoDeCredito(String cartaoDeCredito) {
+		this.cartaoDeCredito = cartaoDeCredito;
+	}
+
 	public Carrinho getCarrinho() {
 		return carrinho;
 	}
