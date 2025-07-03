@@ -1,15 +1,24 @@
 package br.sistema.menu;
 
 import br.sistema.conta.*;
+import br.sistema.BDD.*;
 
 import java.util.*;
 
 public class Menu {
     private Loja loja;
+<<<<<<< Updated upstream
     private Scanner scanner;
 
     public Menu(Loja loja) {
+=======
+    private BancoDeDados bdd;
+    private Scanner scanner;
+
+    public Menu(Loja loja, BancoDeDados bdd) {
+>>>>>>> Stashed changes
         this.loja = loja;
+        this.bdd = bdd;
         this.scanner = new Scanner(System.in);
     }
 
@@ -24,6 +33,7 @@ public class Menu {
             System.out.println("5. Buscar Produto por Nome");
             System.out.println("6. Buscar Produto por Código");
             System.out.println("7. Listar Produtos de um Fornecedor");
+            System.out.println("8. Remover um fornecedor");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 
@@ -45,6 +55,7 @@ public class Menu {
                 case 5 -> buscarPorNome();
                 case 6 -> buscarPorCodigo();
                 case 7 -> listarPorFornecedor();
+                case 8 -> removerFornecedor();
                 case 0 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção inválida.");
             }
@@ -78,7 +89,10 @@ public class Menu {
         List<Fornecedor> lista = loja.getFornecedores();
         System.out.println("Fornecedores disponíveis:");
         for (int i = 0; i < lista.size(); i++) {
-            System.out.println((i + 1) + ". " + lista.get(i).getNome() + " (" + lista.get(i).getCnpj() + ")");
+        	if (lista.get(i) == null) {
+        		System.out.println("Não há fornecedores disponíveis.");
+        	}
+        	else System.out.println((i + 1) + ". " + lista.get(i).getNome() + " (" + lista.get(i).getCnpj() + ")");
         }
         System.out.println("0. Criar novo fornecedor");
         System.out.print("Escolha: ");
@@ -92,8 +106,8 @@ public class Menu {
             String s = scanner.nextLine();
             Fornecedor novo = new Fornecedor(s);            
             System.out.print("CNPJ do novo fornecedor: ");
-            String cnpj = scanner.nextLine();
-            novo.setCnpj(cnpj);
+            s = scanner.nextLine();
+            novo.setCnpj(s);
             
             loja.adicionarFornecedor(novo);
             return novo;
@@ -182,4 +196,16 @@ public class Menu {
             }
         }
     }
+    
+    private void removerFornecedor() {
+    	System.out.println("Digite o nome do fornecedor a ser removido.");
+    	String s = scanner.nextLine();
+        List<Fornecedor> lista = loja.getFornecedores();
+        for (Fornecedor f : lista) {
+        	if (f.getNome().equalsIgnoreCase(s)) {
+        		loja.removerFornecedor(f);
+        	}
+        }
+    }
+    
 }

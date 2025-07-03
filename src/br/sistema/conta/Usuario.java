@@ -23,6 +23,7 @@ public abstract class Usuario {
     private String login;
     private String senha;
     private String CEP;
+    private String endereco;
 //    private Carrinho carrinho;
 //    private HistoricoCompras historicoCompras;
 
@@ -37,10 +38,11 @@ public abstract class Usuario {
     	this();
     	this.nome = nome;
     }    
-    public Usuario(String login, String senha) {
+    public Usuario(String login, String senha, String endereco) {
     	this();
         this.login = login;
         this.senha = senha;
+        this.setEndereco(endereco);
     }
     
     
@@ -106,6 +108,7 @@ public abstract class Usuario {
         return senha;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Usuario u) {
@@ -113,4 +116,10 @@ public abstract class Usuario {
         }
         return false;
     }
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 }

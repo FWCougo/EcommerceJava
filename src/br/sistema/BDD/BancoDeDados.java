@@ -127,4 +127,52 @@ public class BancoDeDados {
         return Contas;
     }
 	
+<<<<<<< Updated upstream
 }
+=======
+    //Methods Items
+    public boolean checaItem(ItemFornecedorProduto item) 
+    {
+    	if (!estoque.contains(item)) {
+            return true;
+        }
+    	
+    	return false;
+    }
+    public void adicionarItem(ItemFornecedorProduto item) {
+    	if(checaItem(item)) 
+    	{
+            estoque.add(item);
+            SalvarEstoque();
+            return;
+    	}    	
+    }
+    public void SalvarEstoque() {
+    	try {        	
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePathEstoque), estoque);
+            System.out.println("Produtos salvos com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar Produtos: " + e.getMessage());
+        }
+    }   
+    public List<ItemFornecedorProduto> CarregarEstoque() {
+        try {
+            File file = new File(filePathEstoque);
+            if (file.exists()) {
+                estoque = mapper.readValue(file, new TypeReference<List<ItemFornecedorProduto>>() {});
+                System.out.println("Estoque carregados com sucesso.");
+            } else {
+                System.out.println("Arquivo de estoque não encontrado. Criando novo cadastro.");
+                estoque = new ArrayList<ItemFornecedorProduto>();
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar Estoque: " + e.getMessage());
+            estoque = new ArrayList<ItemFornecedorProduto>();
+        }
+        
+        return estoque;
+    }
+    
+    
+}
+>>>>>>> Stashed changes

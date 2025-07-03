@@ -42,9 +42,41 @@ public class Carrinho {
             itens.add(new ItemCarrinho(item, quantidadeDesejada));
             System.out.println("Produto adicionado ao carrinho!");
         } else {
-            System.out.println("Quantidade indisponível em estoque.");
+            if (item.getQuantidade() > 0) {
+            	itens.add(new ItemCarrinho(item, item.getQuantidade()));
+            	System.out.println("Quantidade disponível no estoque adicionado ao carrinho.");
+            }
+            else {
+            	System.out.println("Produto indisponível no estoque.");
+            }
         }
     }
+	
+	public void removerProduto(ItemFornecedorProduto item, int quantidadeDesejada, int opcao) { 
+		for (ItemCarrinho ic : itens) {
+			if (ic.getItem().equals(item)){
+				if (item.getQuantidade() == 1) {
+					itens.remove(ic);
+					System.out.println("Produto removido do carrinho.");
+					exibirCarrinho();
+				}
+				else if (opcao==1) {
+						itens.remove(ic);
+						System.out.println("Produto removido do carrinho.");
+						exibirCarrinho();
+					}
+				}
+				else if (item.getQuantidade()<quantidadeDesejada) {
+						itens.remove(ic);
+						System.out.println("Produto removido do carrinho.");
+						exibirCarrinho();
+				}
+				else {
+					int quantidadeItem = item.getQuantidade() - quantidadeDesejada;
+					item.setQuantidade(quantidadeItem);
+			}
+		}
+		}
 
     public void exibirCarrinho() {
         if (itens.isEmpty()) {

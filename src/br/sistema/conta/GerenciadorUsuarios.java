@@ -1,7 +1,6 @@
 package br.sistema.conta;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 import br.sistema.BDD.*;
@@ -31,8 +30,10 @@ public class GerenciadorUsuarios {
     			String nome = sc.nextLine();
     			System.out.println("Senha do Fornecedor: "); 
     			String senha = sc.nextLine();
+    			System.out.println("Endereco do Fornecedor:");
+    			String endereco = sc.nextLine();
     			
-    			Fornecedor f = new Fornecedor(nome, senha);
+    			Fornecedor f = new Fornecedor(nome, senha, endereco);
     			
     			if (!bdd.ChecaUsuario(f)) {    				
     	            return false;
@@ -43,7 +44,7 @@ public class GerenciadorUsuarios {
     			System.out.println("Telefone do Fornecedor: "); 
     			f.setTelefone(sc.nextLine());
     			System.out.println("CEP do Fornecedor: "); 
-    			f.setCEP(sc.nextLine());    
+    			f.setCEP(sc.nextLine());
     			f.setFornecedor(1);
     	        if (bdd.AdicionarUsuario(f)) {
     	            return true;
@@ -55,8 +56,10 @@ public class GerenciadorUsuarios {
     			String nome = sc.nextLine();
     			System.out.println("Senha do Cliente: "); 
     			String senha = sc.nextLine();
+    			System.out.println("Endereco do Cliente:");
+    			String endereco = sc.nextLine();
     			
-    			Cliente c = new Cliente(nome, senha);
+    			Cliente c = new Cliente(nome, senha, endereco);
     			
     			if (!bdd.ChecaUsuario(c)) {    				
     	            return false;

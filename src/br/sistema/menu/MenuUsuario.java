@@ -165,6 +165,43 @@ public class MenuUsuario {
         
         cliente.getCarrinho().adicionarProduto(item, qtd);
     }
+    
+    public void removerDoCarrinho() {
+    	System.out.println("Código do produto: ");
+    	int codigo = scanner.nextInt();
+    	scanner.nextLine();
+    	
+    	ItemFornecedorProduto item = loja.buscarPorCodigo(codigo);
+    	if (item == null) {
+    		System.out.println("Produto não encontrado.");
+    	}
+    	
+    	System.out.println("Deseja remover o item completamente ou apenas diminuir a quantidade?");
+    	System.out.println("1: Remover 2: Diminuir quantidade");
+    	int opcao = scanner.nextInt();
+    	scanner.nextLine();
+    	
+    	if (opcao==2) {
+    		System.out.println("Digite a quantidade a ser removida.");
+    		int qtd = scanner.nextInt();
+    		scanner.nextLine();
+    		
+    		if (qtd <= 0) {
+    			System.out.println("Quantidade inválida para remoção.");
+    			return;
+    		}
+    		else {
+    			cliente.getCarrinho().removerProduto(item, qtd, opcao);
+    		}
+    		}
+    	else if (opcao==1){
+    		cliente.getCarrinho().removerProduto(item, 0, opcao);
+    	}
+    	else {
+    		System.out.println("Opcao invalida.");
+    		return;
+    	}
+    }
 
     private void verHistorico() {
         //List<Compra> lista = usuario.getHistoricoCompras().listarCompras();

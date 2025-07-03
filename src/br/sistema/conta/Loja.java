@@ -13,7 +13,18 @@ public class Loja {
             fornecedores.add(f);
         }
     }
+<<<<<<< Updated upstream
 
+=======
+    
+    public void removerFornecedor(Fornecedor f) {
+    	if (fornecedores.contains(f)) {
+    		fornecedores.remove(f);
+    		bdd.RemoveUsuario(f.getNome());
+    	}
+    }
+    
+>>>>>>> Stashed changes
     public List<Fornecedor> getFornecedores() {
         return fornecedores;
     }

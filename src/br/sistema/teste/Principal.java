@@ -10,14 +10,17 @@ import br.sistema.conta.ItemFornecedorProduto;
 import br.sistema.conta.Login;
 import br.sistema.conta.Loja;
 import br.sistema.conta.Produto;
-import br.sistema.menu.Menu;
-import br.sistema.menu.MenuUsuario;
+import br.sistema.menu.*;
 
 public class Principal {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BancoDeDados bdd = new BancoDeDados();        
+<<<<<<< Updated upstream
         Loja loja = inicializarLojaComProdutos();
+=======
+        Loja loja = new Loja(bdd);
+>>>>>>> Stashed changes
         //HistoricoCompras historico = new HistoricoCompras();
         GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios(bdd);
 //        Usuario usuario = new Usuario();
@@ -48,7 +51,11 @@ public class Principal {
                     	tipoDeConta = l.realizarLogin(scanner);       	
                     }                     
                     if(tipoDeConta == 0) { 						
+<<<<<<< Updated upstream
                     	Menu menu = new Menu(loja);             
+=======
+                    	Menu menu = new Menu(loja, bdd);             
+>>>>>>> Stashed changes
                         menu.exibirMenu();					    
                     }
                     else
@@ -58,9 +65,11 @@ public class Principal {
                     		 Cliente c = (Cliente) l.getUsuario();
                     		 MenuUsuario menuUsuario = new MenuUsuario(loja, c,bdd);
                              menuUsuario.exibirMenu();	 
+                             
                     	 }else if(l.getUsuario().getFornecedor()==1) {
                     		 Fornecedor f = (Fornecedor) l.getUsuario();
-                             //Add Menu Fornecedor                    		
+                    		 MenuFornecedor menuFornecedor = new MenuFornecedor(loja, f, bdd);
+                    		 menuFornecedor.exibirMenu();                   		
                     	 }
                     	 
                     	 
@@ -84,9 +93,9 @@ public class Principal {
                         System.out.println("Usuário já existe.");
                     }
             	}
-            	case "3" -> {
+            	case "0" -> {
             		System.out.println("Encerrando o sistema...");
-                    return;
+                    System.exit(0);
             	}
             }
             
@@ -140,9 +149,15 @@ public class Principal {
         return gUsuarios.realizarLogin(user, senha);
     }*/
 
+<<<<<<< Updated upstream
     private static Loja inicializarLojaComProdutos() {
         Loja loja = new Loja();
         Fornecedor fornecedor = new Fornecedor("Fornecedor Padrão", "12345678000199");
+=======
+/*    private static Loja inicializarLojaComProdutos() {
+        Loja loja = new Loja();
+        Fornecedor fornecedor = new Fornecedor("Fornecedor Padrão", "12345678000199", "Rua dos Bobos");
+>>>>>>> Stashed changes
         loja.adicionarFornecedor(fornecedor);
 
         Produto p1 = new Produto("Mouse Gamer");
@@ -154,5 +169,5 @@ public class Principal {
         loja.adicionarItem(new ItemFornecedorProduto(p2, fornecedor, 250.00, 5));
 
         return loja;
-    }
-}
+    }*/
+} 

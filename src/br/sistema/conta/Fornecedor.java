@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 public class Fornecedor extends Usuario{
     private String cnpj;
 
+
     public Fornecedor() {
     }
     
@@ -12,8 +13,8 @@ public class Fornecedor extends Usuario{
         super(nome);
     }
     
-    public Fornecedor(String nome, String senha) {
-        super(nome, senha);
+    public Fornecedor(String nome, String senha, String endereco) {
+        super(nome, senha, endereco);
     }
     
     /*public Fornecedor(String nome, String cnpj) {
@@ -36,8 +37,12 @@ public class Fornecedor extends Usuario{
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+    
 
-    @Override
+
+    
+
+	@Override
     public boolean equals(Object obj) {
         if (obj instanceof Fornecedor f) {
             return this.cnpj.equals(f.cnpj);

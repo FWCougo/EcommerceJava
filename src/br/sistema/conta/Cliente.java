@@ -21,8 +21,8 @@ public class Cliente extends Usuario{
     	this.carrinho = new Carrinho(this);
 	}
 	
-	public Cliente(String nome, String senha) {	
-		super(nome, senha);		
+	public Cliente(String nome, String senha, String endereco) {	
+		super(nome, senha, endereco);		
 		this.historicoCompras = new HistoricoCompras();
     	this.carrinho = new Carrinho(this);
 	}
