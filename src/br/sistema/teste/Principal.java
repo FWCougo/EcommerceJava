@@ -1,27 +1,101 @@
 package br.sistema.teste;
 
-import br.sistema.conta.*;
-import br.sistema.menu.*;
-
 import java.util.Scanner;
+
+import br.sistema.BDD.BancoDeDados;
+import br.sistema.conta.Cliente;
+import br.sistema.conta.Fornecedor;
+import br.sistema.conta.GerenciadorUsuarios;
+import br.sistema.conta.ItemFornecedorProduto;
+import br.sistema.conta.Login;
+import br.sistema.conta.Loja;
+import br.sistema.conta.Produto;
+import br.sistema.menu.Menu;
+import br.sistema.menu.MenuUsuario;
 
 public class Principal {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        BancoDeDados bdd = new BancoDeDados();        
         Loja loja = inicializarLojaComProdutos();
-        HistoricoCompras historico = new HistoricoCompras();
-        GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios();
-
+        //HistoricoCompras historico = new HistoricoCompras();
+        GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios(bdd);
+//        Usuario usuario = new Usuario();
+        
+        
+        
         while (true) {
             System.out.println("\nEscolha uma opção:");
-            System.out.println("1 - Login como Admin");
+            /*System.out.println("1 - Login como Admin");
             System.out.println("2 - Login como Usuário");
             System.out.println("3 - Cadastrar Novo Usuário");
             System.out.println("0 - Sair do sistema");
+            System.out.print("Opção: ");*/
+            
+            System.out.println("1 - Fazer Login");
+            System.out.println("2 - Cadastre-se");
+            System.out.println("0 - Sair do sistema");
             System.out.print("Opção: ");
+            
             String tipo = scanner.nextLine();
-
+            
             switch (tipo) {
+            	case "1" -> {
+            		Login l = new Login(bdd); 					      
+                    int tipoDeConta = -1;						
+                    
+                    while (tipoDeConta == -1) { 				
+                    	tipoDeConta = l.realizarLogin(scanner);       	
+                    }                     
+                    if(tipoDeConta == 0) { 						
+                    	Menu menu = new Menu(loja);             
+                        menu.exibirMenu();					    
+                    }
+                    else
+                    {
+                    	 if(l.getUsuario().getFornecedor()==0) {
+                    		 
+                    		 Cliente c = (Cliente) l.getUsuario();
+                    		 MenuUsuario menuUsuario = new MenuUsuario(loja, c,bdd);
+                             menuUsuario.exibirMenu();	 
+                    	 }else if(l.getUsuario().getFornecedor()==1) {
+                    		 Fornecedor f = (Fornecedor) l.getUsuario();
+                             //Add Menu Fornecedor                    		
+                    	 }
+                    	 
+                    	 
+                    }
+
+            	}
+            	case "2" -> {             		
+            		
+                    /*System.out.print("Novo login: ");
+                    String novoLogin = scanner.nextLine();
+                    System.out.print("Nova senha: ");
+                    String novaSenha = scanner.nextLine();
+                    
+                    boolean cadastrado = gerenciadorUsuarios.cadastrarUsuario(novoLogin, novaSenha);*/
+            		
+            		boolean cadastrado = gerenciadorUsuarios.cadastrarUsuario(scanner);
+                    
+                    if (cadastrado) {
+                        System.out.println("Usuário cadastrado com sucesso!");
+                    } else {
+                        System.out.println("Usuário já existe.");
+                    }
+            	}
+            	case "3" -> {
+            		System.out.println("Encerrando o sistema...");
+                    return;
+            	}
+            }
+            
+            
+            
+        }
+            
+
+            /*switch (tipo) {
                 case "1" -> {
                     while (!Login.realizarLogin()) {
                         System.out.println("Usuário ou senha incorretos. Tente novamente.\n");
@@ -55,16 +129,16 @@ public class Principal {
                 }
                 default -> System.out.println("Opção inválida.");
             }
-        }
+        }*/
     }
 
-    private static boolean realizarLoginUsuario(Scanner sc, GerenciadorUsuarios gUsuarios) {
+ /*   private static boolean realizarLoginUsuario(Scanner sc, GerenciadorUsuarios gUsuarios) {
         System.out.print("Usuário: ");
         String user = sc.nextLine();
         System.out.print("Senha: ");
         String senha = sc.nextLine();
         return gUsuarios.realizarLogin(user, senha);
-    }
+    }*/
 
     private static Loja inicializarLojaComProdutos() {
         Loja loja = new Loja();

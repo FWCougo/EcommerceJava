@@ -89,10 +89,12 @@ public class Menu {
             return lista.get(escolha - 1);
         } else {
             System.out.print("Nome do novo fornecedor: ");
-            String nome = scanner.nextLine();
+            String s = scanner.nextLine();
+            Fornecedor novo = new Fornecedor(s);            
             System.out.print("CNPJ do novo fornecedor: ");
             String cnpj = scanner.nextLine();
-            Fornecedor novo = new Fornecedor(nome, cnpj);
+            novo.setCnpj(cnpj);
+            
             loja.adicionarFornecedor(novo);
             return novo;
         }

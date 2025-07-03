@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoricoCompras {
-    private List<Compra> compras = new ArrayList<>();
+    private List<Compra> compras = new ArrayList<>();    
+    
+    public HistoricoCompras()
+    {
+    	this.compras = new ArrayList<Compra>();
+    }
+    
+    public List<Compra> getCompras() {
+        return compras;
+    }
 
+    
     public void registrarCompra(Compra compra) {
         compras.add(compra);
     }
